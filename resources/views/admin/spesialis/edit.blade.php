@@ -4,6 +4,11 @@
     Spesialis Management
 @endsection
 
+@section('page')
+    Kesehatan Apps | Spesialis | Edit
+@endsection
+
+
 @section('breadcrumb')
     <li class="breadcrumb-items"><a href="{{ route('spesialis.index') }}">Spesialis</a>/</li>
     <li class="breadcrumb-items active">Edit</li>

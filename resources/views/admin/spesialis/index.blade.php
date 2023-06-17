@@ -4,9 +4,10 @@
     Spesialis Management
 @endsection
 
-@section('title_card')
-    Data Spesialis
+@section('page')
+    Kesehatan Apps | Spesialis
 @endsection
+
 
 @section('breadcrumb')
     <li class="breadcrumb-items">Spesialis</li>
@@ -33,7 +34,7 @@
                 <div class="card-body">
                     <div class="col">
                         <div class="table">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="tables" class="table table-bordered table-hover">
                                 @if(session('success'))
                                     @component('components.alert')
                                         @slot('type') success  @endslot

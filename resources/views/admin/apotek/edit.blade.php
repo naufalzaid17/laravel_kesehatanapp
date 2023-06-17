@@ -4,6 +4,11 @@
     Apotek Management
 @endsection
 
+@section('page')
+    Kesehatan Apps | Apotek | Edit
+@endsection
+
+
 @section('breadcrumb')
     <li class="breadcrumb-items"><a href="{{ route('apotek.index') }}">Apotek</a>/</li>
     <li class="breadcrumb-items active">Edit</li>

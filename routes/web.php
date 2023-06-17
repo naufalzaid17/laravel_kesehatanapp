@@ -7,7 +7,10 @@ use App\Http\Controllers\ApiSpesialisController;
 use App\Http\Controllers\RumahSakitController;
 use App\Http\Controllers\ApotekController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ApiArticleController;
+use App\Http\Controllers\ApiDokterController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,24 +24,40 @@ use App\Http\Controllers\RoleController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function(){
-    Route::resource('/spesialis', SpesialisController::class)->except('create', 'show');
-    Route::resource('/rumahsakit', RumahSakitController::class)->except('create');
-    Route::resource('/apotek', ApotekController::class)->except('create');
-    Route::resource('/article', ArticleController::class);
-    Route::resource('/role', RoleController::class)->except('create', 'show', 'edit', 'update');
-    Route::post('/role/permission', [RoleController::class, 'addPermission'])->name('roles.add_permission');
-    Route::get('/role/role-permission', [RoleController::class, 'rolePermission'])->name('roles.roles_permission');
-    Route::get('role/{id}', [RoleController::class, 'roles'])->name('roles');
+    // Route::resource('/rumahsakit', RumahSakitController::class)->except('create');
+    // Route::resource('/apotek', ApotekController::class)->except('create');
+
+    Route::group(['middleware' => ['role:Admin']], function(){
+        Route::resource('/users', UserController::class)->except('show');
+        Route::get('/users/roles/{id}', [UserController::class, 'roles'])->name('users.roles');
+        Route::put('/users/roles/{id}', [UserController::class, 'setRole'])->name('users.set_role');
+        Route::resource('/role', RoleController::class)->except('create', 'show', 'edit', 'update');
+        Route::resource('/spesialis', SpesialisController::class)->except('create', 'show');
+
+    });
+
+
+    Route::group(['middleware' => ['role:Dokter']], function(){
+        Route::resource('/article', ArticleController::class);
+    });
+
 });
 
-
+// Spesialis
 Route::get('/api/spesialis/index', [ApiSpesialisController::class, 'index']);
-Route::post('/api/spesialis/store', [ApiSpesialisController::class, 'store']);
+Route::get('/api/spesialis/{id}', [ApiSpesialisController::class, 'show']);
+// Route::post('/api/spesialis/store', [ApiSpesialisController::class, 'store']);
 
+// Article
+Route::get('/api/article/index', [ApiArticleController::class, 'index']);
+
+// Dokter
+Route::get('/api/dokter/index', [ApiDokterController::class, 'index']);
+Route::get('/api/dokter/{id}', [ApiDokterController::class, 'show']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

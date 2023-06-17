@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('articles', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('photo');
-            $table->text('content');
-            $table->timestamps();
+        Schema::table('dokters', function (Blueprint $table) {
+            $table->BigInteger('spesialis_id')->unsigned()->change();
+            $table->foreign('spesialis_id')->references('id')->on('spesialis')->onUpdate('cascade');
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('articles');
+        Schema::table('dokters', function (Blueprint $table) {
+            $table->BigInteger('spesialis_id')->change();
+        });
     }
 };

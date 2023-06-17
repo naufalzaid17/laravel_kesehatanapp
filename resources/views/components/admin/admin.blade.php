@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Blank Page</title>
+    <title>@yield('page')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -105,6 +105,35 @@
             placeholder:'Masukan Content Article',
           })
         })
+
+        $('#tables').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+        });
+
+        $("#no_telepon").hide();
+        $("#spesialis").hide();
+        if(document.getElementById('selectRole').value == "Dokter"){
+            $("#no_telepon").show();
+            $("#spesialis").show();
+        }
+
+       $("#selectRole").change(function(){
+        var val = $(this).val();
+        if(val === "Dokter"){
+            $("#no_telepon").show();
+            $("#spesialis").show();
+        }else{
+            $("#no_telepon").hide();
+            $('#spesialis').hide();
+        }
+       })
+
       </script>
 </body>
 

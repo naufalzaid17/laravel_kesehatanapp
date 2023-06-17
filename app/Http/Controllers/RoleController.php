@@ -93,38 +93,38 @@ class RoleController extends Controller
         return redirect()->back()->with(['success' => 'Role: ' . $role->name . ' Berhasil Dihapus!']);
     }
 
-    public function addPermission(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|string|unique:permissions'
-        ]);
+    // public function addPermission(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'name' => 'required|string|unique:permissions'
+    //     ]);
 
-        $permission = Permission::firstOrCreate([
-            'name' => $request->name
-        ]);
+    //     $permission = Permission::firstOrCreate([
+    //         'name' => $request->name
+    //     ]);
 
-        return redirect()->back()->with(['success' => 'Permission: ' . $permission->name .  ' Berhasil Dibuat!']);
-    }
+    //     return redirect()->back()->with(['success' => 'Permission: ' . $permission->name .  ' Berhasil Dibuat!']);
+    // }
 
-    public function rolePermission(Request $request)
-    {
-        $role = $request->get('role');
+    // public function rolePermission(Request $request)
+    // {
+    //     $role = $request->get('role');
 
-        $permissions = null;
-        $hasPermission = null;
+    //     $permissions = null;
+    //     $hasPermission = null;
 
-        $roles = Role::all()->pluck('name');
+    //     $roles = Role::all()->pluck('name');
 
-        if(!empty($role)){
-            $getRole = Role::findByName($role);
+    //     if(!empty($role)){
+    //         $getRole = Role::findByName($role);
 
-            $hasPermission = DB::table('role_has_permissions')
-            ->select('permissions.name')
-            ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
-            ->where('role_id', $getRole->id)->get()->pluck('name')->all();
+    //         $hasPermission = DB::table('role_has_permissions')
+    //         ->select('permissions.name')
+    //         ->join('permissions', 'role_has_permissions.permission_id', '=', 'permissions.id')
+    //         ->where('role_id', $getRole->id)->get()->pluck('name')->all();
 
-            $permissions = Permission::all()->pluck('name');
-        }
+    //         $permissions = Permission::all()->pluck('name');
+    //     }
 
-    }
+    // }
 }

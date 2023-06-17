@@ -74,7 +74,13 @@ class ApiSpesialisController extends Controller
      */
     public function show($id)
     {
-        //
+        $spesialis = Spesialis::findorFail($id);
+        $response = [
+            'message' => 'success',
+            'success' => true,
+            'data'    => $spesialis,
+        ];
+        return response()->json($response);
     }
 
     /**

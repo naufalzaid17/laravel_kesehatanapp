@@ -4,6 +4,11 @@
     Rumah Sakit Management
 @endsection
 
+@section('page')
+    Kesehatan Apps | Rumah Sakit | Edit
+@endsection
+
+
 @section('breadcrumb')
     <li class="breadcrumb-items"><a href="{{ route('rumahsakit.index') }}">Rumah Sakit</a>/</li>
     <li class="breadcrumb-items active">Edit</li>

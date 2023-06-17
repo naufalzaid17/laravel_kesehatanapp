@@ -4,8 +4,8 @@
     Rumah Sakit Management
 @endsection
 
-@section('title_card')
-    Data Rumah Sakit
+@section('page')
+    Kesehatan Apps | Rumah Sakit
 @endsection
 
 @section('breadcrumb')
@@ -23,7 +23,7 @@
                 @slot('body')
                     <div class="col">
                         <div class="table">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="tables" class="table table-bordered table-hover">
                                 @if (session('success'))
                                     @component('components.alert')
                                         @slot('type')

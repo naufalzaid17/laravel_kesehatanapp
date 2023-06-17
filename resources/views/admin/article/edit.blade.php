@@ -4,6 +4,11 @@
     Article Management
 @endsection
 
+@section('page')
+    Kesehatan Apps | Article | Edit
+@endsection
+
+
 @section('breadcrumb')
     <li class="breadcrumb-items"><a href="{{ route('article.index') }}">Article</a>/</li>
     <li class="breadcrumb-items active">Edit</li>

@@ -1,15 +1,15 @@
 @extends('components.admin.admin')
 
 @section('title')
-    Article Management
+    User Management
 @endsection
 
-@section('page')
-    Kesehatan Apps | Article
+@section('title_card')
+    Data User
 @endsection
 
 @section('breadcrumb')
-    <li class="breadcrumb-items">Article</li>
+    <li class="breadcrumb-items">User</li>
 @endsection
 
 @section('content')
@@ -17,13 +17,13 @@
         <div class="col-md-10">
             @component('components.card')
                 @slot('header')
-                    Article Data
+                    User Data
                 @endslot
 
                 @slot('body')
                     <div class="col">
                         <div class="table">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="tables" class="table table-bordered table-hover">
                                 @if (session('success'))
                                     @component('components.alert')
                                         @slot('type')
@@ -36,29 +36,34 @@
                                 @endif
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Title</th>
-                                        <th>Content</th>
+                                        <th>Name</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @forelse ($article as $item)
+                                    @forelse ($user as $item)
                                         <tr>
+                                            <td>{{$item->name}}</td>
                                             <td>
-                                                @if (!empty($item->photo))
-                                                <img src="{{ asset('images/' . $item->photo)}}" alt="{{$item->title}}" width="120px" height="80px">
+                                                @foreach ($item->getRoleNames() as $role)
+                                                    <label for="" class="badge badge-info">{{ $role}}</label>
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @if ($item->status)
+                                                    <label for="" class="badge badge-success">Active</label>
                                                 @else
-                                                <img src="https://via.placeholder.com/120x80" alt="{{$item->title}}">
+                                                    <label for="" class="badge badge-default"></label>
                                                 @endif
                                             </td>
-                                            <td>{{ $item->title }}</td>
-                                            <td>{!! $item->content !!}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{ route('article.edit', $item->id) }}" class="btn btn-warning">Edit</a>
-                                                    <form action="{{ route('article.destroy', $item->id) }}" method="POST">
+                                                    <a href="{{ route('users.roles', $item->id) }}" class="btn btn-info">Set Roles</a>
+                                                    <a href="{{ route('users.edit', $item->id) }}" class="btn btn-warning">Edit</a>
+                                                    <form action="{{ route('users.destroy', $item->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger">Delete</button>
@@ -83,7 +88,7 @@
             <div class="card">
 
                 <div class="card-header">
-                    <div class="card-title">Create Article</div>
+                    <div class="card-title">Create User</div>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -95,7 +100,7 @@
                     </div>
                 </div>
                 <div class="card-body d-flex justify-content-center">
-                    <a href="{{ route('article.create')}}" class="btn btn-primary">Create Article</a>
+                    <a href="{{ route('users.create')}}" class="btn btn-primary">Create User</a>
                 </div>
             </div>
         </div>

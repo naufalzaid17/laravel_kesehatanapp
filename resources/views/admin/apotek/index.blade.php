@@ -4,6 +4,10 @@
     Apotek Management
 @endsection
 
+@section('page')
+    Kesehatan Apps | Apotek
+@endsection
+
 @section('breadcrumb')
     <li class="breadcrumb-items">Apotek</li>
 @endsection

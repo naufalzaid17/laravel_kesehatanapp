@@ -4,6 +4,11 @@
     Role Management
 @endsection
 
+@section('page')
+    Kesehatan Apps | Role Management
+@endsection
+
+
 @section('breadcrumb')
     <li class="breadcrumb-items">Role</li>
 @endsection
@@ -28,7 +33,7 @@
                 <div class="card-body">
                     <div class="col">
                         <div class="table">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table id="tables" class="table table-bordered table-hover">
                                 @if(session('success'))
                                     @component('components.alert')
                                         @slot('type') success  @endslot
