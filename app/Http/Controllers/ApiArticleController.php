@@ -59,32 +59,6 @@ class ApiArticleController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required|string|max:255',
-            'photo' => 'required|image|mimes:jpg,png,jpeg|max:2048',
-            'content' => 'required|string'
-        ]);
-
-        try {
-            $photo = null;
-
-            if($request->hasFile('photo')){
-                $photo = $this->saveFile($request->file('photo'));
-
-            }
-
-            // $photoName = now()->format('Y-m-d') . '.' . $request->photo->extension();
-            // $request->photo->move(public_path('images'), $photoName);
-
-            $article = Article::create([
-                'title' => $request->title,
-                'content' => $request->content,
-                'photo' => $photo,
-            ]);
-            return redirect(route('article.index'))->with(['success' => 'Data Article: Berhasil Ditambahkan!']);
-        } catch (\Exception $e) {
-            return redirect()->back()->with(['error' => $e->getMessage()]);
-        }
 
 
     }
